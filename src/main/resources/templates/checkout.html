@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Подтверждение заказа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 30px;
+        }
+
+        .checkout {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+        }
+
+        .block {
+            margin-top: 20px;
+            padding: 16px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: 1fr 100px 120px 120px;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 12px 16px;
+            border: none;
+            background: #222;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .error {
+            color: #b00020;
+            margin-top: 15px;
+            padding: 12px;
+            background: #ffecec;
+            border-radius: 8px;
+        }
+
+        .total {
+            font-size: 22px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="checkout">
+    <h1>Подтверждение заказа</h1>
+
+    <div class="error" th:if="${orderError}">
+        <strong>Ошибка:</strong>
+        <span th:text="${orderError}"></span>
+    </div>
+
+    <div class="block">
+        <h2>Покупатель</h2>
+
+        <p>
+            <strong>Имя:</strong>
+            <span th:text="${user.name}">Имя</span>
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            <span th:text="${user.email}">email@mail.com</span>
+        </p>
+
+        <p>
+            <strong>Телефон:</strong>
+            <span th:text="${user.phone}">Телефон</span>
+        </p>
+    </div>
+
+    <div class="block">
+        <h2>Товары</h2>
+
+        <div class="item" th:each="item : ${items}">
+            <div th:text="${item.product.name}">Товар</div>
+
+            <div>
+                x<span th:text="${item.quantity}">1</span>
+            </div>
+
+            <div>
+                <span th:text="${item.product.price}">0</span> ₽
+            </div>
+
+            <div>
+                <span th:text="${item.total}">0</span> ₽
+            </div>
+        </div>
+
+        <div class="total">
+            Итого: <span th:text="${total}">0</span> ₽
+        </div>
+    </div>
+
+    <form th:action="@{/checkout}" method="post">
+        <button class="btn" type="submit">Подтвердить заказ</button>
+    </form>
+
+    <a class="btn" href="/cart">Назад в корзину</a>
+</div>
+
+</body>
+</html>

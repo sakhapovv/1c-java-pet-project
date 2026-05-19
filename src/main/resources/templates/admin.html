@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 30px;
+        }
+
+        .box {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            background: #222;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .message {
+            margin-top: 16px;
+            padding: 12px;
+            background: #e9ffe9;
+            border-radius: 8px;
+        }
+
+        .links {
+            margin-top: 24px;
+        }
+
+        .links a {
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>Админ-панель</h1>
+
+    <p>
+        Товаров в базе Java:
+        <strong th:text="${productsCount}">0</strong>
+    </p>
+
+    <form th:action="@{/admin/sync/products}" method="post">
+        <button class="btn" type="submit">
+            Синхронизировать товары из 1С
+        </button>
+    </form>
+
+    <div class="message" th:if="${message}" th:text="${message}">
+        Сообщение
+    </div>
+
+    <div class="links">
+        <a href="/products">Каталог</a>
+        <a href="/cart">Корзина</a>
+    </div>
+</div>
+
+</body>
+</html>
