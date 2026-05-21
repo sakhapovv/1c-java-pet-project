@@ -456,15 +456,6 @@ POST /api/orders/status
 ИнтеграцияСайтаСервер.ПовторитьОтправкуСтатусовЗаказовНаСайт()
 ```
 
-Расписание:
-
-```text
-каждый день с 00:00:00 до 23:59:59
-повторять каждые 300 секунд
-```
-
-300 секунд = 5 минут.
-
 Повторно отправляются записи, где:
 
 ```text
@@ -643,12 +634,6 @@ POST /api/orders/status
 
 ```powershell
 docker run --name shop-postgres -e POSTGRES_DB=shop_db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
-```
-
-Проверка:
-
-```powershell
-docker ps
 ```
 
 ### Java-приложение через Docker
